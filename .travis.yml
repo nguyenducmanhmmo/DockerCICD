@@ -16,8 +16,8 @@ after_success:
     #login 
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #push
-    - docer push mmo/multi-client
-    - docer push mmo/multi-server
-    - docer push mmo/multi-nginx
-    - docer push mmo/multi-worker
+    - docker push mmo/multi-client
+    - docker push mmo/multi-server
+    - docker push mmo/multi-nginx
+    - docker push mmo/multi-worker
 

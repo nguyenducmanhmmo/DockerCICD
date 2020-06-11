@@ -1,0 +1,23 @@
+sudo: required
+services: 
+    - docker
+before-install:
+    - docker build -t mmo/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run mmo/react-test npm test -- --coverage
+
+after_success:
+    - docker build -t mmo/multi-client ./client
+    - docker build -t mmo/multi-server ./server
+    - docker build -t mmo/multi-nginx ./nginx
+    - docker build -t mmo/multi-worker ./worker
+
+    #login 
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #push
+    - docer push mmo/multi-client
+    - docer push mmo/multi-server
+    - docer push mmo/multi-nginx
+    - docer push mmo/multi-worker
+

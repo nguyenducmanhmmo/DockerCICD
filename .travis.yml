@@ -8,16 +8,16 @@ script:
     - docker run mmo/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t mmo/multi-client ./client
-    - docker build -t mmo/multi-server ./server
-    - docker build -t mmo/multi-nginx ./nginx
-    - docker build -t mmo/multi-worker ./worker
+    - docker build -t manhnd23/multi-client ./client
+    - docker build -t manhnd23/multi-server ./server
+    - docker build -t manhnd23/multi-nginx ./nginx
+    - docker build -t manhnd23/multi-worker ./worker
 
     #login 
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #push
-    - docker push mmo/multi-client
-    - docker push mmo/multi-server
-    - docker push mmo/multi-nginx
-    - docker push mmo/multi-worker
+    - docker push manhnd23/multi-client
+    - docker push manhnd23/multi-server
+    - docker push manhnd23/multi-nginx
+    - docker push manhnd23/multi-worker
 
